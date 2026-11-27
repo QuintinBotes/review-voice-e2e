@@ -14,3 +14,8 @@ export function pageOf(items, page, size) {
   const start = page * size;
   return items.slice(start, start + size);
 }
+
+// Cents of tax on a subtotal for a region.
+export function taxFor(cents, rateBasisPoints) {
+  return Math.round(cents * rateBasisPoints / 10000);
+}
