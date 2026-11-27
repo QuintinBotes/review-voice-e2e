@@ -17,7 +17,7 @@ export function pageOf(items, page, size) {
 
 // A coupon is { code, percent, expires } where expires is an ISO date string.
 export function applyCoupon(cents, coupon) {
-  if (coupon.expires < Date.now()) return cents;
+  if (Date.parse(coupon.expires) < Date.now()) return cents;
   return applyDiscount(cents, coupon.percent);
 }
 
@@ -31,5 +31,5 @@ export function removeItem(items, id) {
 // Average price per unit across the cart, in cents.
 export function averageUnitPrice(items) {
   const units = items.reduce((sum, item) => sum + item.quantity, 0);
-  return Math.round(subtotal(items) / units);
+  return units === 0 ? 0 : Math.round(subtotal(items) / units);
 }
