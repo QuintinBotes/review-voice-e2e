@@ -1,0 +1,7 @@
+identity:
+  owner_reviewer: QuintinBotes
+repositories:
+  include:
+    - QuintinBotes/review-voice-e2e
+writes:
+  github_posting_enabled: true

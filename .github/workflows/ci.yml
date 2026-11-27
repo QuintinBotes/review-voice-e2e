@@ -1,0 +1,16 @@
+name: CI
+on: [pull_request]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: test
+        run: |
+          mode=$(head -1 ci-mode.txt)
+          echo "ci-mode: $mode"
+          case "$mode" in
+            red) echo "forced red"; exit 1 ;;
+            pending) sleep 1500 ;;
+          esac
+          npm test

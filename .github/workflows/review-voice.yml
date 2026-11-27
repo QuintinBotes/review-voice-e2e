@@ -1,0 +1,28 @@
+name: Review Voice
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
+permissions:
+  contents: read
+  pull-requests: write
+concurrency:
+  group: review-voice-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: QuintinBotes/review-voice@ed46ab1c6720a9253fe94d8e1515eede1c3a4376
+        with:
+          anthropic-api-key: ${{ secrets.ANTHROPIC_API_KEY }}
+          post: true
+      - if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: review-voice-store-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/review-voice
+          include-hidden-files: true
+          if-no-files-found: ignore
