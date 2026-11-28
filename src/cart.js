@@ -14,3 +14,8 @@ export function pageOf(items, page, size) {
   const start = page * size;
   return items.slice(start, start + size);
 }
+
+// True when the cart holds no items.
+export function isEmpty(items) {
+  return items.length === 0;
+}
