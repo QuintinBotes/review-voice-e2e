@@ -15,7 +15,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - uses: QuintinBotes/review-voice@20bb1ba8ae570ee7004a2fcf2b0ccef4d4a98545
+      - uses: QuintinBotes/review-voice@4ab5e26ca016b80907baf7e70d39b2326b730149
         with:
           anthropic-api-key: ${{ secrets.ANTHROPIC_API_KEY }}
           post: true
